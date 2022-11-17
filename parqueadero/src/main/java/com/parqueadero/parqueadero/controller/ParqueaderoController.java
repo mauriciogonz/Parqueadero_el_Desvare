@@ -40,6 +40,12 @@ public class ParqueaderoController {
     this.parqueaderosList = this.parqueaderoRepository.ordenar();
   }
 
+  @GetMapping("/historial")
+  public String historial(Model model) {
+    model.addAttribute("hisotrial", historialService.getAllHistorial());
+    return "hisotrial";
+  }
+
   @GetMapping("/mostrar")
   public String mostrar(Model model) {
     model.addAttribute("mostrar_vehiculos", vehiculoService.getAllVehiculos());

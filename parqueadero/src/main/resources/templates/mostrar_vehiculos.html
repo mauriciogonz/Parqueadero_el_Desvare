@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,7 +17,9 @@
     <!--Inicio barra de navegación-->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Parqueadero el Desvare</a>
+        <a th:href="@{/}" class="navbar-brand" aria-current="page"
+          >Parqueadero el Desvare</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -39,7 +41,7 @@
       </div>
       <div class="row">
         <div class="col-lg-3">
-          <a href="/mostrar/registrar" class="btn btn-primary btn-sm mb-3"
+          <a th:href="@{/mostrar/registrar}" class="btn btn-primary btn-sm mb-3"
             >Agregar vehiculo</a
           >
         </div>
@@ -59,18 +61,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr th:each="vehiculo: ${vehiculo}">
+            <td th:text="${vehiculo.placa_vehiculo}"></td>
+            <td th:text="${vehiculo.tipo_vehiculo}"></td>
+            <td th:text="${vehiculo.fecha_ingreso}"></td>
+            <td th:text="${vehiculo.hora_ingreso}"></td>
             <td>
-              <th:block>
-                <label />
-                <th:block>, </th:block>
+              <th:block th:each="parqueadero,iter: ${vehiculo.parqueadero}">
+                <label th:text="${parquedero.num_parq}" />
+                <th:block th:if="${!iter.last}">, </th:block>
               </th:block>
             </td>
-            <td align="center">
-              <a class="btn btn-danger">salida</a>
+            <td>
+              <a
+                th:href="@{/mostrar/editar/{id}(id=${mostrar.id})}"
+                class="btn btn-primary"
+                >Update</a
+              >
+              <a
+                th:href="@{/mostrar/{id}(id=${mostrar.id})}"
+                class="btn btn-danger"
+                >Delete</a
+              >
             </td>
           </tr>
         </tbody>
