@@ -24,7 +24,7 @@ public class historialService implements IhistorialService {
   }
 
   @Override
-  public historial saveHisotrial(historial historial) {
+  public historial saveHistorial(historial historial) {
     return historialRepository.save(historial);
   }
 

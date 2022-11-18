@@ -2,8 +2,11 @@ package com.parqueadero.parqueadero.entity;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.Date;
 import javax.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "vehiculo")
@@ -12,20 +15,22 @@ public class vehiculo implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "tipo_vehiculo", nullable = false)
+  @Column(name = "tipo_vehiculo", nullable = true)
   private String tipo_vehiculo;
 
   @Column(name = "placa_vehiculo", nullable = false)
   private String placa_vehiculo;
 
-  @Column(name = "fecha_ingreso", nullable = false)
-  private Date fecha_ingreso;
+  @Column(name = "fecha_ingreso", nullable = true)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate fecha_ingreso;
 
-  @Column(name = "hora_ingreso", nullable = false)
+  @Column(name = "hora_ingreso", nullable = true)
   private Time hora_ingreso;
 
   @Column(name = "fecha_salida", nullable = true)
-  private Date fecha_salida;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate fecha_salida;
 
   @Column(name = "hora_salida", nullable = true)
   private Time hora_salida;
@@ -36,16 +41,16 @@ public class vehiculo implements Serializable {
   @OneToOne
   private parqueadero parqueadero;
 
-  // private Set<parqueadero> parqueaderos = new HashSet<>();
+  //private Set<parqueadero> parqueaderos = new HashSet<>();
 
   public vehiculo() {}
 
   public vehiculo(
     String tipo_vehiculo,
     String placa_vehiculo,
-    Date fecha_ingreso,
+    LocalDate fecha_ingreso,
     Time hora_ingreso,
-    Date fecha_salida,
+    LocalDate fecha_salida,
     Time hora_salida,
     int valor_pagar
   ) {
@@ -82,11 +87,11 @@ public class vehiculo implements Serializable {
     this.placa_vehiculo = placa_vehiculo;
   }
 
-  public Date getFecha_ingreso() {
+  public LocalDate getFecha_ingreso() {
     return fecha_ingreso;
   }
 
-  public void setFecha_ingreso(Date fecha_ingreso) {
+  public void setFecha_ingreso(LocalDate fecha_ingreso) {
     this.fecha_ingreso = fecha_ingreso;
   }
 
@@ -98,11 +103,11 @@ public class vehiculo implements Serializable {
     this.hora_ingreso = hora_ingreso;
   }
 
-  public Date getFecha_salida() {
+  public LocalDate getFecha_salida() {
     return fecha_salida;
   }
 
-  public void setFecha_salida(Date fecha_salida) {
+  public void setFecha_salida(LocalDate fecha_salida) {
     this.fecha_salida = fecha_salida;
   }
 

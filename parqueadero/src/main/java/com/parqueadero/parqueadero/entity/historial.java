@@ -17,7 +17,7 @@ public class historial implements Serializable {
   @Column(name = "tipo_vehiculo", nullable = false)
   private String tipo_vehiculo;
 
-  @Column(name = "valor_cancelado")
+  @Column(name = "valor_cancelado", nullable = false)
   private int valor_cancelado;
 
   @OneToOne

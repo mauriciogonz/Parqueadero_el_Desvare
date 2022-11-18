@@ -1,6 +1,7 @@
 package com.parqueadero.parqueadero.controller;
 
 import com.parqueadero.parqueadero.Repository.IparqueaderoRepository;
+import com.parqueadero.parqueadero.entity.historial;
 import com.parqueadero.parqueadero.entity.parqueadero;
 import com.parqueadero.parqueadero.entity.vehiculo;
 import com.parqueadero.parqueadero.service.historialService;
@@ -48,8 +49,13 @@ public class ParqueaderoController {
 
   @GetMapping("/mostrar")
   public String mostrar(Model model) {
-    model.addAttribute("mostrar_vehiculos", vehiculoService.getAllVehiculos());
+    model.addAttribute("vehiculo", vehiculoService.getAllVehiculos());
     return "mostrar_vehiculos";
+  }
+
+  public String saveHistorial(vehiculo historial) {
+    historial recuerdo = new historial();
+    historialService.saveHistorial(historial);
   }
 
   @GetMapping("/mostrar/registrar")
@@ -57,7 +63,7 @@ public class ParqueaderoController {
     // este objeto Student almacenara los valores
     vehiculo vehiculo = new vehiculo();
     model.addAttribute("vehiculo", vehiculo);
-    model.addAttribute("parqueaderosList", parqueaderosList);
+    // model.addAttribute("parqueaderosList", parqueaderosList);
     return "registro";
   }
 
@@ -72,7 +78,7 @@ public class ParqueaderoController {
     vehiculo vh = vehiculoService.getVehiculoById(id);
     model.addAttribute("vehiculo", vh);
     model.addAttribute("parqueaderosList", parqueaderosList);
-    return "salida";
+    return "salidapru";
   }
 
   @PostMapping("/mostrar/{id}")
@@ -91,13 +97,15 @@ public class ParqueaderoController {
     existentvehiculo.setHora_ingreso(vehiculo.getHora_ingreso());
     existentvehiculo.setFecha_salida(vehiculo.getFecha_salida());
     existentvehiculo.setHora_salida(vehiculo.getHora_salida());
-
+    existentvehiculo.setValor_pagar(vehiculo.getValor_pagar());
     vehiculoService.updateVehiculo(existentvehiculo);
     return "redirect:/mostrar";
   }
 
   @GetMapping("/mostrar/{id}")
   public String deleteVehiculo(@PathVariable Long id) {
+    vehiculo aux = vehiculoService.getVehiculoById(id);
+    saveHistorial(aux);
     vehiculoService.deleteVehiculoById(id);
     return "redirect:/mostrar";
   }

@@ -8,7 +8,7 @@ public interface IhistorialService {
 
   List<historial> getHistorialByName(String placa_vehiculo);
 
-  historial saveHisotrial(historial historial);
+  historial saveHistorial(historial historial);
 
   historial getHistorialById(Long id);
 

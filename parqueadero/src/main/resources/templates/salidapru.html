@@ -50,7 +50,11 @@
           <div class="card-body">
             <h1 class="card-title">Nuevo Registro de Vehiculo</h1>
             <!--Inicio del formulario-->
-            <form th:action="@{/mostrar}" th:object="${vehiculo}" method="POST">
+            <form
+              th:action="@{/mostrar/{id}(id=${vehiculo.id})}"
+              th:object="${vehiculo}"
+              method="POST"
+            >
               <div class="mb-3">
                 <div class="form-group">
                   <label>Placa del Vehiculo</label>
@@ -63,57 +67,50 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label>Tipo de Vehiculo</label>
-                  <input
-                    type="text"
-                    name="tipo_vehiculo"
-                    th:field="*{tipo_vehiculo}"
-                    class="form-control"
-                    placeholder="Ingrese el tipo de vehiculo"
-                  />
-                  <!--<select
-                    th:field="*{tipo_vehiculo}"
-                    class="form-select"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Seleccione</option>
-                    <option value="1">Moto</option>
-                    <option value="2">Bicicleta</option>
-                    <option value="3">Carro</option>
-                  </select>-->
-                </div>
-                <div class="form-group">
-                  <label>Fecha de ingreso</label>
+                  <label>Fecha de Salida</label>
                   <input
                     type="Date"
-                    th:field="*{fecha_ingreso}"
-                    name="fecha_ingreso"
+                    th:field="*{fecha_salida}"
+                    name="fecha_salida"
                     class="form-control"
                   />
-                  <label>Hora de ingreso</label>
+                  <label>Hora de Salida</label>
                   <input
                     type="time"
                     step="2"
-                    th:field="*{hora_ingreso}"
-                    name="hora_ingreso"
+                    th:field="*{hora_salida}"
+                    name="hora_salida"
                     class="form-control"
                   />
                 </div>
-                <!-- <div class="form-group">
-                  <label>Parqueadero</label>
-                  <select
-                    th:field="${vehiculo.parqueadero}"
-                    name="parqueadero"
+                <div class="form-group">
+                  <label>Valor a Pagar</label>
+                  <input
+                    type="int"
+                    th:field="*{valor_pagar}"
+                    name="valor_pagar"
                     class="form-control"
-                    multiple="true"
-                  >
-                    <option
-                      th:each="parqueadero :${parqueaderosList}"
-                      th:value="${parqueadero.id}"
-                      th:text="${parquedero.num_parq}"
-                    />
-                  </select>
-                </div>-->
+                  />
+                </div>
+                <input
+                  type="hidden"
+                  name="tipo_vehiculo"
+                  th:field="*{tipo_vehiculo}"
+                  class="form-control"
+                />
+                <input
+                  type="hidden"
+                  th:field="*{fecha_ingreso}"
+                  name="fecha_ingreso"
+                  class="form-control"
+                />
+                <input
+                  type="hidden"
+                  step="2"
+                  th:field="*{hora_ingreso}"
+                  name="hora_ingreso"
+                  class="form-control"
+                />
                 <div class="box-footer mt-4">
                   <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
