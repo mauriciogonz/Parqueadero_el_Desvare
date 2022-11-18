@@ -48,29 +48,14 @@
           <tr>
             <th>Placa</th>
             <th>Tipo de Vehiculo</th>
-            <th>Fecha de Ingreso</th>
-            <th>Hora de Ingreso</th>
-            <th>Acciones</th>
+            <th>Valor Cancelado</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="vehiculo: ${vehiculo}">
-            <td th:text="${vehiculo.placa_vehiculo}"></td>
-            <td th:text="${vehiculo.tipo_vehiculo}"></td>
-            <td th:text="${vehiculo.fecha_ingreso}"></td>
-            <td th:text="${vehiculo.hora_ingreso}"></td>
-            <td>
-              <a
-                th:href="@{/mostrar/salida/{id}(id=${vehiculo.id})}"
-                class="btn btn-primary"
-                >Salida</a
-              >
-              <a
-                th:href="@{/mostrar/{id}(id=${vehiculo.id})}"
-                class="btn btn-danger"
-                >Delete</a
-              >
-            </td>
+          <tr th:each="historial: ${historial}">
+            <td th:text="${historial.placa_vehiculo}"></td>
+            <td th:text="${historial.tipo_vehiculo}"></td>
+            <td th:text="${historial.valor_cancelado}"></td>
           </tr>
         </tbody>
       </table>

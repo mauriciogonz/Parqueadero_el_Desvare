@@ -43,8 +43,8 @@ public class ParqueaderoController {
 
   @GetMapping("/historial")
   public String historial(Model model) {
-    model.addAttribute("hisotrial", historialService.getAllHistorial());
-    return "hisotrial";
+    model.addAttribute("historial", historialService.getAllHistorial());
+    return "historial";
   }
 
   @GetMapping("/mostrar")
@@ -53,9 +53,12 @@ public class ParqueaderoController {
     return "mostrar_vehiculos";
   }
 
-  public String saveHistorial(vehiculo historial) {
+  public void saveHistorial(vehiculo historial) {
     historial recuerdo = new historial();
-    historialService.saveHistorial(historial);
+    recuerdo.setPlaca_vehiculo(historial.getPlaca_vehiculo());
+    recuerdo.setTipo_vehiculo(historial.getTipo_vehiculo());
+    recuerdo.setValor_cancelado(historial.getValor_pagar());
+    historialService.saveHistorial(recuerdo);
   }
 
   @GetMapping("/mostrar/registrar")
@@ -99,6 +102,8 @@ public class ParqueaderoController {
     existentvehiculo.setHora_salida(vehiculo.getHora_salida());
     existentvehiculo.setValor_pagar(vehiculo.getValor_pagar());
     vehiculoService.updateVehiculo(existentvehiculo);
+    saveHistorial(existentvehiculo);
+    vehiculoService.deleteVehiculoById(id);
     return "redirect:/mostrar";
   }
 
