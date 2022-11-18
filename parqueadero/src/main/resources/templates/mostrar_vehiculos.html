@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
 
-    <title>mostrar Vehiculos</title>
+    <title>Mostrar Vehiculos</title>
   </head>
   <body>
     <!--Inicio barra de navegación-->
@@ -36,7 +36,7 @@
     <!--Fin barra de navegación-->
     <!--Inicio del contenedor general-->
     <div class="container">
-      <div class="row">
+      <div class="row" align="center">
         <h1>Lista de vehiculos</h1>
       </div>
       <div class="row">
@@ -44,11 +44,7 @@
           <a th:href="@{/mostrar/registrar}" class="btn btn-primary btn-sm mb-3"
             >Agregar vehiculo</a
           >
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3">
-          <a th:href="@{/historial}" class="btn btn-primary btn-sm mb-3"
+          <a th:href="@{/historial}" class="btn btn-danger btn-sm mb-3"
             >Historial</a
           >
         </div>
@@ -67,7 +63,7 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody align="center">
           <tr th:each="vehiculo: ${vehiculo}">
             <td th:text="${vehiculo.placa_vehiculo}"></td>
             <td th:text="${vehiculo.tipo_vehiculo}"></td>
@@ -77,12 +73,8 @@
               <a
                 th:href="@{/mostrar/salida/{id}(id=${vehiculo.id})}"
                 class="btn btn-primary"
-                >Salida</a
               >
-              <a
-                th:href="@{/mostrar/{id}(id=${vehiculo.id})}"
-                class="btn btn-danger"
-                >Delete</a
+                Salida</a
               >
             </td>
           </tr>

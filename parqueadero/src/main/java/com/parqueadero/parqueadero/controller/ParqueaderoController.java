@@ -117,12 +117,12 @@ public class ParqueaderoController {
 
   @RequestMapping("/")
   public String principal() {
-    return "home";
+    return "login";
   }
 
-  @RequestMapping("/login")
+  @RequestMapping("/home")
   public String login() {
-    return "login";
+    return "home";
   }
 
   @RequestMapping("/nosotros")
