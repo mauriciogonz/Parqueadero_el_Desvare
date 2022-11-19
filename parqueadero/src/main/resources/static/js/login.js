@@ -1,4 +1,3 @@
-var attempt = 3;
 function validar() {
   var usuario = "administrador";
   var pwd = "admin";
@@ -12,5 +11,10 @@ function validar() {
     window.location = "/mostrar";
   } else {
     alert("Por favor ingresa, nombre y contraseña correctos.");
+  }
+
+  function diferencia(hora1, hora2) {
+    let diferencia = (fecha2.getTime() - fecha1.getTime()) / 1000;
+    diferencia /= 60;
   }
 }

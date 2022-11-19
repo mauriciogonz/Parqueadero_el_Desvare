@@ -6,9 +6,9 @@ import com.parqueadero.parqueadero.entity.parqueadero;
 import com.parqueadero.parqueadero.entity.vehiculo;
 import com.parqueadero.parqueadero.service.historialService;
 import com.parqueadero.parqueadero.service.vehiculoService;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -47,6 +47,7 @@ public class ParqueaderoController {
   public String historial(Model model, @Param("filtro") String filtro) {
     model.addAttribute("historial", historialService.getAllHistorial(filtro));
     model.addAttribute("filtro", filtro);
+
     return "historial";
   }
 
@@ -65,8 +66,19 @@ public class ParqueaderoController {
     historialService.saveHistorial(recuerdo);
   }
 
-  public void restaHora(int hola) {
-    JOptionPane.showInputDialog(null, "hola");
+  public void restaHora(vehiculo resta) {
+    long diferenciaMinutos =
+      Math.abs(
+        resta.getHora_salida().getTime() - resta.getHora_ingreso().getTime()
+      ) /
+      1000;
+    diferenciaMinutos /= 60;
+    if (resta.getTipo_vehiculo() == "Moto") {
+      diferenciaMinutos *= 34;
+    } else if (resta.getTipo_vehiculo() == "Carro") {
+      diferenciaMinutos *= 54;
+    }
+    resta.setValor_pagar((int) diferenciaMinutos);
   }
 
   @GetMapping("/mostrar/registrar")
