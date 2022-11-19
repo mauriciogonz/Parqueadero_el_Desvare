@@ -3,8 +3,6 @@ package com.parqueadero.parqueadero.entity;
 import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.Date;
 import javax.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
