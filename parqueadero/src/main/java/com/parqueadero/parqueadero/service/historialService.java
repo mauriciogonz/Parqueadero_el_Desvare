@@ -13,8 +13,15 @@ public class historialService implements IhistorialService {
     this.historialRepository = hisotrialRepository;
   }
 
-  @Override
+  /* @Override
   public List<historial> getAllHistorial() {
+    return historialRepository.ordenarhistorial();
+  } */
+  @Override
+  public List<historial> getAllHistorial(String filtro) {
+    if (filtro != null) {
+      return historialRepository.busquedaPorPlaca(filtro);
+    }
     return historialRepository.ordenarhistorial();
   }
 

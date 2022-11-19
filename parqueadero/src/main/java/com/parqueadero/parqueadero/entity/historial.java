@@ -1,8 +1,10 @@
 package com.parqueadero.parqueadero.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 //import java.util.*;
 import javax.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "historial")
@@ -20,6 +22,10 @@ public class historial implements Serializable {
   @Column(name = "valor_cancelado", nullable = false)
   private int valor_cancelado;
 
+  @Column(name = "fecha_salida", nullable = true)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate fecha_salida;
+
   @OneToOne
   private vehiculo vehiculo;
 
@@ -29,12 +35,14 @@ public class historial implements Serializable {
     String placa_vehiculo,
     String tipo_vehiculo,
     int valor_cancelado,
+    LocalDate fecha_salida,
     com.parqueadero.parqueadero.entity.vehiculo vehiculo
   ) {
     this.placa_vehiculo = placa_vehiculo;
     this.tipo_vehiculo = tipo_vehiculo;
     this.valor_cancelado = valor_cancelado;
     this.vehiculo = vehiculo;
+    this.fecha_salida = fecha_salida;
   }
 
   public Long getId() {
@@ -75,6 +83,14 @@ public class historial implements Serializable {
 
   public void setVehiculo(vehiculo vehiculo) {
     this.vehiculo = vehiculo;
+  }
+
+  public LocalDate getFecha_salida() {
+    return fecha_salida;
+  }
+
+  public void setFecha_salida(LocalDate fecha_salida) {
+    this.fecha_salida = fecha_salida;
   }
 
   @Override

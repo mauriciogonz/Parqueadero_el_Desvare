@@ -42,8 +42,30 @@
     </div>
     <!--Fin del contenedor general-->
     <!--Inicio de la tabla-->
-    <div class="container container-fluid">
-      <div class="container">
+    <div class="container container-fluid text-center">
+      <form class="form-inline" th:action="@{historial}">
+        <div class="form-group mb-2">
+          <label> Filtrar: </label>
+          <div class="form-group mx-sm-3 mb-2">
+            <input
+              type="text"
+              name="filtro"
+              class="form-control"
+              id="filtro"
+              th:value="${filtro}"
+              placeholder="Digite la fecha a buscar"
+            />
+          </div>
+          <input type="submit" class="btn btn-primary mb-2" value="Buscar" />
+          <input
+            type="button"
+            class="btn btn-secondary mb-2"
+            value="Limpiar"
+            onclick="limpiarCampos()"
+          />
+        </div>
+      </form>
+      <div>
         <br />
         <div class="row">
           <div class="col-lg-3">
@@ -52,8 +74,9 @@
         </div>
       </div>
       <table class="table table-striped table-bordered">
-        <thead class="table-dark" align="center">
+        <thead class="table-dark">
           <tr>
+            <th>Fecha de Salida</th>
             <th>Placa</th>
             <th>Tipo de Vehiculo</th>
             <th>Valor Cancelado</th>
@@ -61,6 +84,7 @@
         </thead>
         <tbody>
           <tr th:each="historial: ${historial}">
+            <td th:text="${historial.fecha_salida}"></td>
             <td th:text="${historial.placa_vehiculo}"></td>
             <td th:text="${historial.tipo_vehiculo}"></td>
             <td th:text="${historial.valor_cancelado}"></td>
@@ -69,5 +93,10 @@
       </table>
     </div>
     <!--Fin de la tabla-->
+    <script type="text/javascript">
+      function limpiarCampos() {
+        window.location = "/historial";
+      }
+    </script>
   </body>
 </html>

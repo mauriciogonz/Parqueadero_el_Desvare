@@ -4,7 +4,7 @@ import com.parqueadero.parqueadero.entity.historial;
 import java.util.List;
 
 public interface IhistorialService {
-  List<historial> getAllHistorial();
+  List<historial> getAllHistorial(String filtro);
 
   List<historial> getHistorialByName(String placa_vehiculo);
 

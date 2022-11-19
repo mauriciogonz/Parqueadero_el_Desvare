@@ -1,5 +1,6 @@
 package com.parqueadero.parqueadero.controller;
 
+import aj.org.objectweb.asm.Attribute;
 import com.parqueadero.parqueadero.Repository.IparqueaderoRepository;
 import com.parqueadero.parqueadero.entity.historial;
 import com.parqueadero.parqueadero.entity.parqueadero;
@@ -8,7 +9,10 @@ import com.parqueadero.parqueadero.service.historialService;
 import com.parqueadero.parqueadero.service.vehiculoService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.AttributeValueExp;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +46,9 @@ public class ParqueaderoController {
   }
 
   @GetMapping("/historial")
-  public String historial(Model model) {
-    model.addAttribute("historial", historialService.getAllHistorial());
+  public String historial(Model model, @Param("filtro") String filtro) {
+    model.addAttribute("historial", historialService.getAllHistorial(filtro));
+    model.addAttribute("filtro", filtro);
     return "historial";
   }
 
@@ -58,7 +63,12 @@ public class ParqueaderoController {
     recuerdo.setPlaca_vehiculo(historial.getPlaca_vehiculo());
     recuerdo.setTipo_vehiculo(historial.getTipo_vehiculo());
     recuerdo.setValor_cancelado(historial.getValor_pagar());
+    recuerdo.setFecha_salida(historial.getFecha_salida());
     historialService.saveHistorial(recuerdo);
+  }
+
+  public void restaHora(int hola) {
+    JOptionPane.showInputDialog(null, "hola");
   }
 
   @GetMapping("/mostrar/registrar")
@@ -93,6 +103,7 @@ public class ParqueaderoController {
     //sacar el vehiculo de la b.d. por el id
     vehiculo existentvehiculo = vehiculoService.getVehiculoById(id);
     // cargarlo
+
     existentvehiculo.setId(id);
     existentvehiculo.setTipo_vehiculo(vehiculo.getTipo_vehiculo());
     existentvehiculo.setPlaca_vehiculo(vehiculo.getPlaca_vehiculo());

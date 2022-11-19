@@ -7,8 +7,7 @@ function validar() {
   if (user.value == usuario && password.value == pwd) {
     alert("Ingreso Exitoso");
     window.location = "/home";
-  }
-  if (user.value == guarda && password.value == pwdguarda) {
+  } else if (user.value == guarda && password.value == pwdguarda) {
     alert("Ingreso Exitoso");
     window.location = "/mostrar";
   } else {
